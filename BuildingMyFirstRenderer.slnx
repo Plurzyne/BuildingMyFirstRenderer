@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="BuildingMyFirstRenderer/BuildingMyFirstRenderer.vcxproj" />
+  <Project Path="BuildingMyFirstRenderer/BuildingMyFirstRenderer.vcxproj" Id="0ba2915a-30f1-4760-9900-0dbdd4ab6473" />
 </Solution>
