@@ -142,6 +142,7 @@
     <ClCompile Include="BuildingMyFirstRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="camera.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="general.h" />
     <ClInclude Include="hittable.h" />
