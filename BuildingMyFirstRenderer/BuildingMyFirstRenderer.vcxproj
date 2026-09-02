@@ -142,15 +142,16 @@
     <ClCompile Include="BuildingMyFirstRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="camera.h" />
-    <ClInclude Include="color.h" />
-    <ClInclude Include="general.h" />
-    <ClInclude Include="hittable.h" />
-    <ClInclude Include="hittable_list.h" />
-    <ClInclude Include="interval.h" />
-    <ClInclude Include="ray.h" />
-    <ClInclude Include="sphere.h" />
-    <ClInclude Include="vec3.h" />
+    <ClInclude Include="Headers\camera.h" />
+    <ClInclude Include="Headers\color.h" />
+    <ClInclude Include="Headers\general.h" />
+    <ClInclude Include="Headers\hittable.h" />
+    <ClInclude Include="Headers\hittable_list.h" />
+    <ClInclude Include="Headers\interval.h" />
+    <ClInclude Include="Headers\material.h" />
+    <ClInclude Include="Headers\ray.h" />
+    <ClInclude Include="Headers\sphere.h" />
+    <ClInclude Include="Headers\vec3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

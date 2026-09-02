@@ -20,31 +20,34 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="vec3.h">
+    <ClInclude Include="Headers\vec3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="color.h">
+    <ClInclude Include="Headers\sphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ray.h">
+    <ClInclude Include="Headers\ray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="hittable.h">
+    <ClInclude Include="Headers\material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sphere.h">
+    <ClInclude Include="Headers\interval.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="hittable_list.h">
+    <ClInclude Include="Headers\hittable_list.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="general.h">
+    <ClInclude Include="Headers\hittable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="interval.h">
+    <ClInclude Include="Headers\general.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="camera.h">
+    <ClInclude Include="Headers\color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
