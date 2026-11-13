@@ -10,9 +10,13 @@ class camera {
         int image_width = 100;      // Rendered image width in pixel count
         int samples_per_pixel = 10; // Count of random samples for each pixel
         int    max_depth = 10;   // Maximum number of ray bounces into scene
+        std::string float_output_path = "";  // If not empty, also save linear colours as raw floats
 
         void render(const hittable& world) {
             initialize();
+
+            std::vector<float> buffer;
+            buffer.reserve(image_width * image_height * 3);
 
             std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
 
@@ -24,8 +28,22 @@ class camera {
                         ray r = get_ray(i, j);
                         pixel_color += ray_color(r, max_depth, world);
                     }
-                    write_color(std::cout, pixel_samples_scale * pixel_color);
+                    color pixel_average = pixel_samples_scale * pixel_color;
+
+                    buffer.push_back(float(pixel_average.x()));
+                    buffer.push_back(float(pixel_average.y()));
+                    buffer.push_back(float(pixel_average.z()));
+
+                    write_color(std::cout, pixel_average);
                 }
+            }
+
+            if (!float_output_path.empty()) {
+                std::ofstream out(float_output_path, std::ios::binary);
+                if (!out)
+                    std::cerr << "Could not open " << float_output_path << '\n';
+                out.write(reinterpret_cast<const char*>(buffer.data()),
+                    buffer.size() * sizeof(float));
             }
 
             std::clog << "\rDone.                 \n";

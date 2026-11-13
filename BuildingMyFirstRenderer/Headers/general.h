@@ -7,6 +7,9 @@
 #include <limits>
 #include <memory>
 #include <random>
+#include <fstream>
+#include <string>
+#include <vector>
 
 // C++ Std Usings
 
@@ -24,10 +27,18 @@ inline double degrees_to_radians(double degrees) {
     return degrees * pi / 180.0;
 }
 
+inline std::mt19937& rng() {
+    static std::mt19937 generator;
+    return generator;
+}
+
+inline void set_seed(unsigned int seed) {
+    rng().seed(seed);
+}
+
 inline double random_double() {
     static std::uniform_real_distribution<double> distribution(0.0, 1.0);
-    static std::mt19937 generator;
-    return distribution(generator);
+    return distribution(rng());
 }
 
 inline double random_double(double min, double max) {

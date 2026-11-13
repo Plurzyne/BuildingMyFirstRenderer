@@ -5,7 +5,7 @@
 #include "Headers/material.h"
 #include "Headers/sphere.h"
 
-int main() {
+int main(int argc, char* argv[]) {
     hittable_list world;
 
     auto material_ground = make_shared<lambertian>(color(0.8, 0.8, 0.0));
@@ -26,6 +26,12 @@ int main() {
     cam.image_width = 400;
     cam.samples_per_pixel = 100;
     cam.max_depth = 50;
+
+    if (argc >= 4) {
+        cam.samples_per_pixel = std::stoi(argv[1]);
+        set_seed(std::stoi(argv[2]));
+        cam.float_output_path = argv[3];
+    }
 
     cam.render(world);
 }
