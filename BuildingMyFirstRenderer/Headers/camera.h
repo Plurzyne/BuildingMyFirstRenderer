@@ -11,12 +11,16 @@ class camera {
         int samples_per_pixel = 10; // Count of random samples for each pixel
         int    max_depth = 10;   // Maximum number of ray bounces into scene
         std::string float_output_path = "";  // If not empty, also save linear colours as raw floats
+        std::string id_output_path = "";     // If not empty, also save which material each pixel shows
 
         void render(const hittable& world) {
             initialize();
 
             std::vector<float> buffer;
             buffer.reserve(image_width * image_height * 3);
+
+            std::vector<unsigned char> ids;
+            ids.reserve(image_width * image_height);
 
             std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
 
@@ -35,6 +39,7 @@ class camera {
                     buffer.push_back(float(pixel_average.z()));
 
                     write_color(std::cout, pixel_average);
+                    ids.push_back(pixel_id(i, j, world));
                 }
             }
 
@@ -44,6 +49,13 @@ class camera {
                     std::cerr << "Could not open " << float_output_path << '\n';
                 out.write(reinterpret_cast<const char*>(buffer.data()),
                     buffer.size() * sizeof(float));
+            }
+
+            if (!id_output_path.empty()) {
+                std::ofstream out(id_output_path, std::ios::binary);
+                if (!out)
+                    std::cerr << "Could not open " << id_output_path << '\n';
+                out.write(reinterpret_cast<const char*>(ids.data()), ids.size());
             }
 
             std::clog << "\rDone.                 \n";
@@ -56,7 +68,7 @@ class camera {
         point3 pixel00_loc;    // Location of pixel 0, 0
         vec3   pixel_delta_u;  // Offset to pixel to the right
         vec3   pixel_delta_v;  // Offset to pixel below
-
+            
         void initialize() {
             image_height = int(image_width / aspect_ratio);
             image_height = (image_height < 1) ? 1 : image_height;
@@ -102,6 +114,18 @@ class camera {
         vec3 sample_square() const {
             // Returns the vector to a random point in the [-.5,-.5]-[+.5,+.5] unit square.
             return vec3(random_double() - 0.5, random_double() - 0.5, 0);
+        }
+
+        unsigned char pixel_id(int i, int j, const hittable& world) const {
+            // Shoot one ray through the exact centre of pixel (i, j), with no random
+            // offset, and report the id of the first material it hits (0 = sky).
+            auto pixel_center = pixel00_loc + (i * pixel_delta_u) + (j * pixel_delta_v);
+            ray r(center, pixel_center - center);
+
+            hit_record rec;
+            if (world.hit(r, interval(0.001, infinity), rec))
+                return (unsigned char)rec.mat->id;
+            return 0;
         }
 
         color ray_color(const ray& r, int depth, const hittable& world) const {

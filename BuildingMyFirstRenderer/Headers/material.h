@@ -7,6 +7,8 @@
 
 class material {
 public:
+    int id = 0;   // Which region this material belongs to, for measurements (0 = sky)
+
     virtual ~material() = default;
 
     virtual bool scatter(

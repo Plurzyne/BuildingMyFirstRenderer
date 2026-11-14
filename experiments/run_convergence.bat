@@ -7,6 +7,10 @@ rem Reference: 4096 samples, seed 1000 (a seed no trial uses)
 echo Rendering reference...
 %EXE% 4096 1000 data\reference.bin > nul
 
+rem Object IDs: which object each pixel's centre ray hits (the same for every render)
+echo Writing object IDs...
+%EXE% 1 1 data\ids_scratch.bin data\ids.bin > nul
+
 rem Trials: 5 sample counts x 5 seeds
 for %%N in (1 4 16 64 256) do (
     for %%S in (1 2 3 4 5) do (
