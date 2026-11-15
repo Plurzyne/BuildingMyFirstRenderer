@@ -1,6 +1,8 @@
 #ifndef HITTABLE_H
 #define HITTABLE_H
 
+#include "general.h"
+
 class material;
 
 class hit_record {
