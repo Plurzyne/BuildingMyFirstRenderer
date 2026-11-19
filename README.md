@@ -2,7 +2,7 @@
 
 A Monte Carlo path tracer in C++17, written from scratch while working through
 [*Ray Tracing in One Weekend*](https://raytracing.github.io/) by Peter Shirley, Trevor David Black and Steve Hollasch.
-About 600 lines, header-only, no external dependencies.
+About 700 lines, header-only, no external dependencies.
 
 ![Glass, diffuse and metal spheres rendered by this path tracer](images/render.png)
 
